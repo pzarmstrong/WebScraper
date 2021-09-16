@@ -17,7 +17,6 @@ def airbnb_scrape(url):
     except TimeoutException:
         print("Property name not found in time")
 
-    # property_details = driver.find_element(By.XPATH, "//div[@class='_tqmy57']");
     try:
         property_details_elem = WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.XPATH, "//div[@class='_tqmy57']")))
         property_details = str.splitlines(property_details_elem.text)
@@ -42,8 +41,8 @@ def airbnb_scrape(url):
 
     print("property name: " + property_name)
     print("property type: " + property_type)
-    print("number of bedrooms: " + num_bedrooms)
-    print("number of bathrooms: " + num_bathrooms)
+    print("number of bedrooms: " + num_bedrooms[2:])
+    print("number of bathrooms: " + num_bathrooms[2:])
     print("amenities:")
     print(*amenities, sep=", ")
     print("\n####\t####\t####\n")
