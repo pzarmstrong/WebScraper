@@ -16,17 +16,23 @@ def airbnb_scrape(url):
         property_name = property_name_elem.text
     except TimeoutException:
         print("Property name not found in time")
+    except NoSuchElementException:
+        print("property name element not found with //h1[@class='_fecoyn4']")
 
     try:
         property_details_elem = WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.XPATH, "//div[@class='_tqmy57']")))
         property_details = str.splitlines(property_details_elem.text)
-    except NoSuchElementException:
+    except TimeoutException:
         print("Property details not found in time")
+    except NoSuchElementException:
+        print("property details element not found with //div[@class='_tqmy57']")
 
     try:
         amenities_elem = WebDriverWait(driver, delay).until(EC.presence_of_all_elements_located((By.XPATH, "//div[@class='_gw4xx4']")))
     except TimeoutException:
         print("Amenities not found in time")
+    except NoSuchElementException:
+        print("amenities element not found with //div[@class='_gw4xx4']")
 
     property_type = str.split(property_details[0], " hosted ")[0]
     num_bedrooms = property_details[3]
@@ -47,6 +53,9 @@ def airbnb_scrape(url):
     print(*amenities, sep=", ")
     print("\n####\t####\t####\n")
 
+print("\n####\t####\t####\n")
 airbnb_scrape("https://www.airbnb.co.uk/rooms/50633275")
 airbnb_scrape("https://www.airbnb.co.uk/rooms/33090114")
 airbnb_scrape("https://www.airbnb.co.uk/rooms/52202994")
+airbnb_scrape("https://www.airbnb.co.uk/rooms/13126329")
+airbnb_scrape("https://www.airbnb.co.uk/rooms/17810191")
