@@ -45,6 +45,7 @@ def airbnb_scrape(url):
             continue
         amenities.append(amens.text)
 
+    print("room url: " + url)
     print("property name: " + property_name)
     print("property type: " + property_type)
     print("number of bedrooms: " + num_bedrooms[2:])
